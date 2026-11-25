@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "palabrilandia",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": "dist/lengua-aventura/browser",
+    "not_found_handling": "single-page-application"
+  }
+}
