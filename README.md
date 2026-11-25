@@ -1,148 +1,151 @@
-# 📚 Palabrilandia | Aprendizaje Gamificado de Lengua y Literatura
+# 📚 Palabrilandia | Plataforma de Aprendizaje Gamificado de Lengua y Literatura
 
-Plataforma educativa web interactiva desarrollada en **Angular** (arquitectura standalone, signals y SCSS) con un sistema de diseño **minimalista y paleta pastel dedicada para niños**, enriquecida con un motor de gamificación completo y gobernada bajo el estándar **OpenSpec** (Spec-Driven Development).
+Plataforma educativa web interactiva diseñada para hacer del aprendizaje de la **Lengua y la Literatura** una experiencia lúdica, accesible y enriquecedora tanto para estudiantes de **Primaria** como de **Bachillerato**. Con una estética minimalista en paleta pastel, música y efectos sonoros interactivos, retos aleatorios y un completo sistema de medallas.
 
----
-
-## 🎨 Diseño y Paleta de Colores Infantil Minimalista
-
-La interfaz fue diseñada evitando el ruido visual y saturación excesiva, priorizando la legibilidad, la suavidad y el confort visual para niños en edad escolar:
-
-- **🌱 Menta Suave (`#4ECDC4` / `#EBF8F6`):** Gramática, aciertos y retroalimentación positiva.
-- **☀️ Sol Ámbar (`#FFD166` / `#FFF9EB`):** Puntos de experiencia (XP), estrellas y recompensas.
-- **🍓 Coral Melocotón (`#FF6B6B` / `#FFEFEF`):** Botones de acción, acentuación y ortografía.
-- **☁️ Azul Nube (`#54A0FF` / `#EFF6FF`):** Comprensión lectora, trivia y categorías.
-- **🌸 Lavanda Sabia (`#9B59B6` / `#F7EFFC`):** Poesía, rima y adivinanzas del búho.
-- **Tipografía Amigable:** Familias *Quicksand* y *Nunito*, con formas curvas, caracteres claros y espaciado generoso.
-- **Botones con relieve 3D táctil:** Feedback visual al presionar con desplazamiento suave.
+🌐 **Sitio Web en Vivo:** [https://palabrilandia.danielayala1793.workers.dev/](https://palabrilandia.danielayala1793.workers.dev/)
 
 ---
 
-## 🎮 Los 5 Juegos Didácticos Interactivos
+## 🎨 Estilo y Paleta de Colores
 
-La plataforma integra exactamente **cinco juegos interactivos** centrados en la rama de **Lengua y Literatura**:
+La plataforma utiliza una interfaz limpia, amable y acogedora pensada para el confort visual de niños y jóvenes estudiantes:
 
-### 1. 🧩 Palabras al Rescate (Completar Oraciones)
-- **Ruta:** `/juegos/palabras`
-- **Contenido:** Ortografía (reglas de *b* y *v*, tildes agudas, llanas y esdrújulas), morfología (sustantivos, adjetivos, verbos) y sinónimos.
-- **Mecánica:** Frases con un hueco interactivo `[ ? ]`. El niño toca la ficha correcta para completar la oración y recibe explicaciones pedagógicas inmediatas.
-
-### 2. 🔍 Caza de Letras Literarias (Sopa de Letras)
-- **Ruta:** `/juegos/sopa`
-- **Contenido:** Vocabulario literario clave (*Poema, Cuento, Verso, Rima, Fábula*).
-- **Mecánica:** Matriz de letras interactiva. El estudiante hace clic en las letras en orden; al descubrir una palabra, se resalta con colores pasteles, se tacha del checklist y se muestra su definición literaria. Incluye botón de pista.
-
-### 3. 🦉 El Búho Sabio: Adivinanzas (Acertijos y Poesía)
-- **Ruta:** `/juegos/adivinanzas`
-- **Contenido:** Poesía en estrofas rimadas sobre el libro, el lápiz, las letras, la biblioteca y los signos de puntuación.
-- **Mecánica:** Pergamino poético con rimas. Permite solicitar pistas progresivas al búho y seleccionar entre alternativas ilustradas, explicando la figura literaria empleada (personificación, metáfora, rima consonante).
-
-### 4. 📜 El Taller de Fábulas y Versos (Ordenar la Oración)
-- **Ruta:** `/juegos/fabulas`
-- **Contenido:** Estructura sintáctica (Sujeto + Verbo + Predicado), versos de autores como Antonio Machado y fábulas de Esopo (*La liebre y la tortuga*, *El poder de la lectura*).
-- **Mecánica:** Banco de fichas desordenadas. El estudiante ensambla las palabras en la línea de trabajo y las comprueba para aprender la moraleja.
-
-### 5. ⭐ Trivia: Rueda de las Letras (Desafío Rápido)
-- **Ruta:** `/juegos/trivia`
-- **Contenido:** Cuatro categorías infantiles (*Cuentos Clásicos*, *Poesía y Rima*, *Gramática Divertida*, *Ortografía Mágica*).
-- **Mecánica:** Rondas interactivas con multiplicador de combo de racha (x1, x2, x3, x4) y explicaciones detalladas para cada respuesta.
+- **🌱 Menta Suave (`#4ECDC4`):** Respuestas correctas, ortografía básica y ánimo positivo.
+- **☀️ Sol Ámbar (`#FFD166`):** Puntos de experiencia (XP), estrellas y recompensas de maestría.
+- **🍓 Coral Melocotón (`#FF6B6B`):** Botones de acción, homófonos y desafíos léxicos.
+- **☁️ Azul Nube (`#54A0FF`):** Comprensión lectora, trivia, sintaxis y criptogramas.
+- **🌸 Lavanda Sabia (`#9B59B6`):** Poesía, adivinanzas, figuras retóricas y literatura moderna.
+- **Tipografía Amigable:** Familias redondeadas *Quicksand* y *Nunito*, con botones 3D de respuesta táctil y micro-animaciones suaves.
+- **Ícono Oficial en Pestaña:** Favicon personalizado de libros literarios con estrella de maestría e ícono dinámico visible en el navegador.
 
 ---
 
-## 🏆 Sistema de Gamificación y Multimedia
+## 🎮 Catálogo de los 12 Juegos Interactivos
 
-- **Puntos de Experiencia (XP) y Estrellas (⭐):** Acumulables por cada acierto y juego completado.
-- **Sistema de Niveles:**
-  - Nivel 1: *Aprendiz de Letras*
-  - Nivel 2: *Explorador de Palabras*
-  - Nivel 3: *Cazador de Rimas*
-  - Nivel 4: *Cuentacuentos Sabio*
-  - Nivel 5: *Maestro de la Pluma*
-- **Medallero:** 6 insignias desbloqueables con animación de confeti (*Primer Paso Lector*, *Guardián de la Ortografía*, *Ojo de Halcón Literario*, etc.).
-- **Mascota Interactiva ("Plumi el Búho"):** Ofrece ánimos, datos curiosos de ortografía y celebra cada victoria.
-- **Efectos de Audio Nativos (Web Audio API):** Sonidos sintetizados en tiempo real mediante osciladores (notas alegres, campanadas de pista, fanfarria de victoria y sonido de clic), sin depender de archivos de audio externos. Incluye botón para silenciar.
-- **Persistencia en LocalStorage:** El progreso del niño se guarda automáticamente en el navegador.
+La plataforma cuenta con un sistema de filtros interactivos en el menú principal que permite seleccionar entre **🌟 Todos (12)**, **🌱 Nivel Primaria (5)** y **🎓 Nivel Bachillerato (7)**. En cada partida, los desafíos se generan y seleccionan de forma **completamente aleatoria** para ofrecer una experiencia fresca en cada intento.
 
----
+### 🌱 Nivel Primaria y General (5 Juegos)
 
-## 📐 OpenSpec: Desarrollo Guiado por Especificaciones
+1. **🧩 Palabras al Rescate (Completar Oraciones)**
+   - **Ruta:** `/juegos/palabras`
+   - **Enfoque:** Ortografía (reglas de *b/v*, *c/s*, acentuación aguda, llana y esdrújula) y categorías gramaticales (sustantivos, verbos, adjetivos).
+   - **Mecánica:** Frases con casillas interactivas y explicaciones pedagógicas inmediatas.
 
-El proyecto incorpora **OpenSpec** (`@fission-ai/openspec`) formalmente configurado para auditar y validar los requerimientos de la plataforma:
+2. **🔍 Caza de Letras Literarias (Sopa de Letras)**
+   - **Ruta:** `/juegos/sopa`
+   - **Enfoque:** Vocabulario literario (*Cuento, Poema, Verso, Rima, Fábula, Novela, Teatro, Ensayo, Soneto, Estrofa*).
+   - **Mecánica:** Tableros temáticos aleatorios con trazado inteligente de líneas rectas (horizontal, vertical y diagonal), sistema de pistas certero y definiciones contextuales.
 
-- **Configuración:** `openspec/config.yaml`
-- **Propuesta de Cambio Activa:** `openspec/changes/plataforma-aprendizaje-lengua/`
-  - `proposal.md`: Justificación, motivación y alcance pedagógico.
-  - `design.md`: Decisiones arquitectónicas, mitigación de riesgos y enfoque técnico.
-  - `tasks.md`: Lista de tareas de implementación.
-  - `specs/`: Especificaciones delta de capacidades.
-- **Especificaciones Base:** `openspec/specs/`
-  - `gamificacion-lengua/spec.md`: Reglas del motor de puntos, niveles y medallas.
-  - `juegos-interactivos/spec.md`: Requerimientos de los 5 minijuegos educativos.
-  - `interfaz-infantil/spec.md`: Criterios de diseño visual, contraste y accesibilidad para niños.
+3. **🦉 El Búho Sabio: Adivinanzas (Acertijos y Poesía)**
+   - **Ruta:** `/juegos/adivinanzas`
+   - **Enfoque:** Estrofas poéticas en rima sobre sonetos, Don Quijote, signos de puntuación y el Realismo Mágico.
+   - **Mecánica:** Pergamino poético con rimas consonantes y pistas progresivas.
 
-### Comandos de OpenSpec
+4. **📜 El Taller de Fábulas y Versos (Ordenar la Oración)**
+   - **Ruta:** `/juegos/fabulas`
+   - **Enfoque:** Estructura de la oración (Sujeto y Predicado), versos de Antonio Machado y moralejas de fábulas clásicas de Esopo.
+   - **Mecánica:** Fichas barajadas aleatoriamente que el estudiante organiza hasta recomponer la historia.
 
-Validar todas las especificaciones y propuestas del proyecto:
-```bash
-npm run openspec:validate
-```
-
-Consultar el estado del sistema con el CLI de OpenSpec:
-```bash
-npm run openspec -- list
-```
+5. **⭐ Trivia: Rueda de las Letras (Desafío Rápido)**
+   - **Ruta:** `/juegos/trivia`
+   - **Enfoque:** Cuentos universales, métrica, partes de la oración y ortografía rápida.
+   - **Mecánica:** Rondas rápidas con multiplicador de combo de racha y explicaciones detalladas.
 
 ---
 
-## 🚀 Puesta en Marcha
+### 🎓 Nivel Bachillerato y Literatura Moderna (7 Juegos Nuevos)
+
+6. **🔬 Laboratorio de Sintaxis (Oraciones Compuestas)**
+   - **Ruta:** `/juegos/sintaxis`
+   - **Enfoque:** Análisis de proposiciones coordinadas (copulativas, adversativas, disyuntivas) y subordinadas (sustantivas de sujeto/CD, adjetivas y adverbiales).
+   - **Mecánica:** Desarme interactivo de oraciones identificando nexos y proposiciones principales.
+
+7. **🏛️ Cronos Literario (Movimientos y Autores)**
+   - **Ruta:** `/juegos/cronos`
+   - **Enfoque:** Clasificación de autores y obras emblemáticas en la **Generación del 98**, **Generación del 27**, **Vanguardias** y **Realismo Mágico** (García Márquez, Lorca, Machado, Cortázar, Borges).
+   - **Mecánica:** Clasificador temporal con tarjetas ilustradas y fragmentos representativos.
+
+8. **🎯 Duelo de Tildes Diacríticas (Ortografía Crítica RAE)**
+   - **Ruta:** `/juegos/tildes`
+   - **Enfoque:** Distinción rápida de monosílabos homófonos (*dé/de*, *sí/si*, *aún/aun*, *más/mas*, *por qué/porque/porqué*).
+   - **Mecánica:** Duelo de reflejos ortográficos con explicación de la función gramatical de cada tilde.
+
+9. **👁️ El Ojo Poético (Figuras Retóricas)**
+   - **Ruta:** `/juegos/figuras`
+   - **Enfoque:** Identificación de recursos expresivos (*Metáfora*, *Oxímoron*, *Sinestesia*, *Hipérbole*, *Anáfora*, *Personificación*).
+   - **Mecánica:** Análisis de versos célebres de Quevedo, Federico García Lorca y Jorge Manrique.
+
+10. **🛡️ La Batalla de Homófonos (Léxico Dudoso)**
+    - **Ruta:** `/juegos/homofonos`
+    - **Enfoque:** Distinción contextual entre parejas dudosas (*revelar/rebelar*, *gravar/grabar*, *valla/vaya/baya*, *tubo/tuvo*, *echo/hecho*).
+    - **Mecánica:** Selección léxica en oraciones reales con análisis de significado.
+
+11. **⚡ Relámpago de Letras (Microficción y Subtexto)**
+    - **Ruta:** `/juegos/microficcion`
+    - **Enfoque:** Lectura crítica, elipsis y sentido oculto en relatos breves de Augusto Monterroso, Jorge Luis Borges, Juan José Arreola y Gabriel García Márquez.
+    - **Mecánica:** Análisis de subtexto e ironía narrativa en microrrelatos.
+
+12. **🧩 El Descifrador del 27 (Criptogramas y Citas)**
+    - **Ruta:** `/juegos/anagramas`
+    - **Enfoque:** Anagramas de palabras clave en frases y versos cumbre de la lírica moderna.
+    - **Mecánica:** Reconstrucción de letras desordenadas para revelar citas literarias legendarias.
+
+---
+
+## 🏆 Salón de Medallas, Logros y Puntuación Colectiva
+
+- **🌐 Marcador de Sabiduría Colectiva:** En la sección `/logros`, la plataforma destaca que los puntos de experiencia (XP) se acumulan de manera colaborativa y conjunta entre todos los estudiantes que juegan en la aplicación, reforzando el compañerismo y el esfuerzo compartido.
+- **📜 Diploma de Honor Comunitario:** Certificado interactivo que acredita la contribución del estudiante al nivel de sabiduría colectivo, personalizable con su avatar lector y con celebración de confeti.
+- **Colección de 14 Medallas de Honor:**
+  - 🌱 *Primer Paso Lector* (Completar la primera actividad)
+  - ✨ *Guardián de la Ortografía* (Dominar retos ortográficos)
+  - 🔍 *Ojo de Halcón Literario* (Completar la sopa de letras)
+  - 🦉 *Acertijo Resuelto* (Descifrar adivinanzas poéticas)
+  - 📜 *Constructor de Historias* (Ordenar fábulas clásicas)
+  - ⭐ *Estrella de las Letras* (Racha perfecta en la trivia)
+  - 🔬 *Analista Sintáctico de Élite* (Dominar oraciones compuestas)
+  - 🏛️ *Cronista de Vanguardias* (Clasificar movimientos literarios)
+  - 🎯 *Francotirador de la Tilde* (Superar el duelo de tildes diacríticas)
+  - 👁️ *Ojo Poético y Retórico* (Identificar tropos y figuras de estilo)
+  - 🛡️ *Guardián del Léxico Homófono* (Triunfar en la batalla de homófonos)
+  - ⚡ *Relámpago de la Ficción* (Analizar microrrelatos)
+  - 🧩 *Criptógrafo del 27* (Resolver anagramas de citas célebres)
+  - 👑 *Erudito de Bachillerato* (Máximo galardón académico al superar los 800 XP)
+
+---
+
+## 🦉 Mascota Sabia y Biblioteca Secreta
+
+- **Plumi el Búho:** Mascota animada con **13 consejos sabios aleatorios** que ofrece advertencias ortográficas (como evitar el dequeísmo), trucos poéticos y frases célebres para amenizar cada sesión.
+- **Biblioteca de Sabiduría:** Sección didáctica interactiva (`/biblioteca`) con **7 guías completas** que explican reglas de acentuación, sintaxis de oraciones coordinadas y subordinadas, figuras retóricas, movimientos poéticos contemporáneos y el arte de la microficción.
+
+---
+
+## 🔊 Efectos de Sonido Interactivos
+
+- Retroalimentación auditiva mediante síntesis de audio nativa del navegador (pop táctil, acierto suave, pistas misteriosas y fanfarria de victoria con confeti).
+- Botón en la barra superior para silenciar o reactivar el sonido en cualquier momento.
+
+---
+
+## 🚀 Cómo Ejecutar el Proyecto Localmente
 
 ### Prerrequisitos
 - Node.js (v18 o superior)
-- npm (v9 o superior)
+- npm
 
-### Ejecutar en Desarrollo
-```bash
-npm start
-```
-Abre tu navegador en `http://localhost:4200`.
-
-### Compilar para Producción
-```bash
-npm run build
-```
-Los artefactos optimizados se generarán en la carpeta `dist/lengua-aventura`.
-
----
-
-## 📁 Estructura del Código
-
-```text
-proyecto_aprendizaje/
-├── openspec/                     # Especificaciones formales OpenSpec
-│   ├── config.yaml
-│   ├── specs/                    # Especificaciones maestras
-│   │   ├── gamificacion-lengua/
-│   │   ├── juegos-interactivos/
-│   │   └── interfaz-infantil/
-│   └── changes/                  # Propuesta plataforma-aprendizaje-lengua
-├── src/
-│   ├── app/
-│   │   ├── components/           # Componentes comunes (Navbar, Mascota Plumi)
-│   │   ├── core/
-│   │   │   ├── models/           # Modelos de datos TypeScript (Juegos, Medallas, Stats)
-│   │   │   └── services/         # Servicios reactivos (GamificationService, SoundService)
-│   │   └── features/
-│   │       ├── home/             # Dashboard principal con catálogo de juegos
-│   │       ├── achievements/     # Salón de medallas, avatares y diploma
-│   │       ├── library/          # Biblioteca de conceptos clave de Lengua
-│   │       ├── openspec-info/    # Vista interactiva del estado de OpenSpec
-│   │       └── games/            # Los 5 juegos interactivos:
-│   │           ├── word-fill/
-│   │           ├── word-search/
-│   │           ├── riddles/
-│   │           ├── sentence-builder/
-│   │           └── trivia/
-│   ├── styles.scss               # Tokens CSS y sistema de diseño pastel
-│   └── index.html                # Fuentes Google (Nunito & Quicksand)
-└── package.json
-```
+### Pasos
+1. Clonar el repositorio:
+   ```bash
+   git clone https://github.com/dan0788/palabrilandia.git
+   cd palabrilandia
+   ```
+2. Instalar dependencias:
+   ```bash
+   npm install --legacy-peer-deps
+   ```
+3. Iniciar el servidor de desarrollo:
+   ```bash
+   npm start
+   ```
+4. Abre tu navegador web en `http://localhost:4200`.
