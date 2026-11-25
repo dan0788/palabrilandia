@@ -1,0 +1,94 @@
+<div class="game-container">
+  <div class="game-header">
+    <div class="header-left">
+      <a routerLink="/" class="back-btn" title="Volver al menú">← Volver</a>
+      <span class="game-badge mint">Juego 8 • Ortografía Crítica</span>
+      <h1 class="game-title">Duelo de Tildes Diacríticas</h1>
+    </div>
+    <div class="header-right">
+      <span class="progress-pill">Duelo {{ currentIndex() + 1 }} de {{ activeChallenges().length }}</span>
+      <span class="streak-pill" [class.active]="currentStreak() > 1">🎯 Racha x{{ currentStreak() }}</span>
+    </div>
+  </div>
+
+  @if (!gameFinished()) {
+    <div class="duel-card anim-pop">
+      <!-- Oración con el espacio de la tilde -->
+      <div class="sentence-arena">
+        <span class="arena-tag">Completa con la forma diacrítica correcta:</span>
+        <div class="sentence-phrase">
+          <span class="phrase-part">{{ currentChallenge().sentenceBefore }}</span>
+          <span class="gap-slot" [class.filled]="selectedWord()" [class.correct]="isAnswerChecked() && isCorrect()" [class.wrong]="isAnswerChecked() && !isCorrect()">
+            {{ selectedWord() ? selectedWord() : '¿ ?' }}
+          </span>
+          <span class="phrase-part">{{ currentChallenge().sentenceAfter }}</span>
+        </div>
+      </div>
+
+      <!-- Opciones del duelo (las 2 alternativas diacríticas) -->
+      <div class="duel-options">
+        @for (w of shuffledOptions(); track w) {
+          <button 
+            type="button" 
+            class="duel-btn" 
+            [class.selected]="selectedWord() === w"
+            [class.correct]="isAnswerChecked() && w === currentChallenge().correctWord"
+            [class.wrong]="isAnswerChecked() && selectedWord() === w && w !== currentChallenge().correctWord"
+            [disabled]="isAnswerChecked()"
+            (click)="selectWord(w)">
+            {{ w }}
+          </button>
+        }
+      </div>
+
+      <!-- Retroalimentación -->
+      @if (isAnswerChecked()) {
+        <div class="feedback-card anim-pop" [class.success]="isCorrect()" [class.wrong]="!isCorrect()">
+          <div class="feedback-title">
+            {{ isCorrect() ? '🎯 ¡Puntería Diacrítica Certera!' : '💡 ¡Cuidado con el acento diacrítico!' }}
+          </div>
+          <p class="feedback-desc">{{ currentChallenge().explanation }}</p>
+          <div class="action-row">
+            <button type="button" class="btn-kid btn-amber anim-pop" (click)="nextChallenge()">
+              {{ currentIndex() === activeChallenges().length - 1 ? '🏁 Ver medallas' : 'Siguiente duelo ➔' }}
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="victory-card anim-pop">
+      <div class="trophy-avatar anim-float">🎯</div>
+      <h2 class="victory-title">¡Francotirador de la Tilde!</h2>
+      <p class="victory-desc">Has superado los duelos ortográficos más exigentes de la Real Academia Española.</p>
+
+      <div class="result-stats">
+        <div class="stat-box">
+          <span class="stat-number">{{ score() }}/{{ activeChallenges().length }}</span>
+          <span class="stat-label">Duelos Ganados</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">x{{ maxStreak() }}</span>
+          <span class="stat-label">Mejor Racha</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">+{{ score() * 30 + 30 }}</span>
+          <span class="stat-label">Puntos XP</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">{{ score() >= 4 ? '⭐⭐⭐' : score() >= 2 ? '⭐⭐' : '⭐' }}</span>
+          <span class="stat-label">Estrellas</span>
+        </div>
+      </div>
+
+      <div class="victory-buttons">
+        <button type="button" class="btn-kid btn-mint" (click)="restartGame()">
+          🔄 Batirse en nuevo duelo
+        </button>
+        <a routerLink="/" class="btn-kid btn-secondary">
+          🏠 Volver a juegos
+        </a>
+      </div>
+    </div>
+  }
+</div>

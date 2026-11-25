@@ -1,0 +1,128 @@
+<div class="openspec-container">
+  <!-- Cabecera -->
+  <div class="page-header">
+    <a routerLink="/" class="back-link">← Volver al inicio</a>
+    <div class="badge-row">
+      <span class="openspec-badge">Spec-Driven Development (SDD)</span>
+      <span class="version-badge">OpenSpec v2.2</span>
+    </div>
+    <h1 class="page-title">📐 Integración de OpenSpec</h1>
+    <p class="page-subtitle">
+      Este proyecto está gobernado y especificado mediante <strong>OpenSpec</strong>, el estándar formal para desarrollo impulsado por especificaciones con agentes de IA.
+    </p>
+  </div>
+
+  <!-- Tarjeta de Estado del Proyecto OpenSpec -->
+  <div class="status-banner anim-pop">
+    <div class="status-item">
+      <span class="status-num">4/4</span>
+      <span class="status-txt">Especificaciones Validadas</span>
+    </div>
+    <div class="status-item">
+      <span class="status-num">5</span>
+      <span class="status-txt">Juegos Formalizados</span>
+    </div>
+    <div class="status-item">
+      <span class="status-num">100%</span>
+      <span class="status-txt">Frontend Standalone</span>
+    </div>
+  </div>
+
+  <!-- Especificaciones del Sistema -->
+  <section class="specs-section">
+    <h2 class="section-title">Capacidades Especificadas en <code>openspec/specs/</code></h2>
+    
+    <div class="specs-cards">
+      <!-- Spec 1: Gamificación -->
+      <div class="spec-card anim-pop">
+        <div class="spec-card-header">
+          <span class="spec-tag">Spec</span>
+          <h3 class="spec-title">gamificacion-lengua</h3>
+        </div>
+        <p class="spec-purpose">
+          <strong>Propósito:</strong> Gestionar el ciclo de gamificación escolar infantil que incluye experiencia (puntos XP), estrellas ganadas por nivel, racha de juego diario, medallas de maestría literaria y retroalimentación audiovisual positiva.
+        </p>
+        <div class="spec-requirements">
+          <h4>Requerimientos Verificados:</h4>
+          <ul>
+            <li>Acumulación de XP (+25 a +35) y estrellas según aciertos.</li>
+            <li>Desbloqueo de 6 medallas temáticas con celebración de confeti.</li>
+            <li>Sintetizador Web Audio API desacoplado de dependencias externas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Spec 2: Juegos Interactivos -->
+      <div class="spec-card anim-pop">
+        <div class="spec-card-header">
+          <span class="spec-tag">Spec</span>
+          <h3 class="spec-title">juegos-interactivos</h3>
+        </div>
+        <p class="spec-purpose">
+          <strong>Propósito:</strong> Proporcionar una suite de 5 juegos didácticos interactivos basados en el currículo de Lengua y Literatura para niños: completar oraciones, sopa de letras, adivinanzas literarias, ordenar la fábula y trivia de lenguaje.
+        </p>
+        <div class="spec-requirements">
+          <h4>Requerimientos Verificados:</h4>
+          <ul>
+            <li>Juego 1: Rellena la Palabra (Ortografía b/v, c/s, acentuación y categorías).</li>
+            <li>Juego 2: Sopa de Letras Literaria (Matriz 8x8 con términos narrativos).</li>
+            <li>Juego 3: El Búho Sabio (Adivinanzas en rima con pistas progresivas).</li>
+            <li>Juego 4: El Taller de Fábulas (Sintaxis y moralejas de Esopo y Machado).</li>
+            <li>Juego 5: Trivia de Lengua (Preguntas por categorías y combos de racha).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Spec 3: Interfaz Infantil -->
+      <div class="spec-card anim-pop">
+        <div class="spec-card-header">
+          <span class="spec-tag">Spec</span>
+          <h3 class="spec-title">interfaz-infantil</h3>
+        </div>
+        <p class="spec-purpose">
+          <strong>Propósito:</strong> Garantizar una experiencia de usuario limpia, accesible y minimalista, con una paleta de colores suave y pastel pensada especialmente para la atención y confort visual de los niños.
+        </p>
+        <div class="spec-requirements">
+          <h4>Requerimientos Verificados:</h4>
+          <ul>
+            <li>Paleta pastel: Menta (#4ECDC4), Sol (#FFD166), Coral (#FF6B6B), Cielo (#54A0FF).</li>
+            <li>Botones con relieve 3D táctil de respuesta amigable.</li>
+            <li>Mascota interactiva "Plumi el Búho" con consejos orales y escritos.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comandos CLI de OpenSpec -->
+  <section class="cli-section anim-pop">
+    <h2 class="section-title">Comandos de Verificación en la Terminal</h2>
+    <p class="cli-desc">Puedes validar o consultar las especificaciones en cualquier momento con los siguientes comandos:</p>
+
+    <div class="code-terminal">
+      <div class="terminal-bar">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="terminal-title">Terminal • proyecto_aprendizaje</span>
+      </div>
+      <div class="terminal-body">
+        <p class="code-line"><span class="prompt">$</span> npm run openspec:validate</p>
+        <p class="code-output success">✓ spec/gamificacion-lengua</p>
+        <p class="code-output success">✓ spec/interfaz-infantil</p>
+        <p class="code-output success">✓ spec/juegos-interactivos</p>
+        <p class="code-output success">✓ change/plataforma-aprendizaje-lengua</p>
+        <p class="code-output highlight">Totals: 4 passed, 0 failed (4 items)</p>
+      </div>
+    </div>
+
+    <div class="quick-commands">
+      <button type="button" class="btn-copy-cmd" (click)="copyCommand('npm run openspec:validate')">
+        📋 Copiar comando: <code>npm run openspec:validate</code>
+      </button>
+      @if (copied) {
+        <span class="copied-msg">¡Copiado al portapapeles!</span>
+      }
+    </div>
+  </section>
+</div>

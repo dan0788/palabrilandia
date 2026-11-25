@@ -1,0 +1,129 @@
+<div class="game-container">
+  <!-- Cabecera del Juego -->
+  <div class="game-header">
+    <div class="header-left">
+      <a routerLink="/" class="back-btn" title="Volver al menú">← Volver</a>
+      <span class="game-badge purple">Juego 3</span>
+      <h1 class="game-title">El Búho Sabio: Adivinanzas</h1>
+    </div>
+    <div class="header-right">
+      <span class="progress-pill">Acertijo {{ currentIndex() + 1 }} de {{ activeRiddles().length }}</span>
+      <span class="score-pill">⭐ {{ score() }} resueltos</span>
+    </div>
+  </div>
+
+  @if (!gameFinished()) {
+    <div class="riddle-card anim-pop">
+      <!-- Pergamino poético -->
+      <div class="scroll-wrapper">
+        <div class="scroll-decoration top">📜 Verso del Sabio Búho</div>
+        <div class="verses-box">
+          @for (line of currentRiddle().verse; track line) {
+            <p class="verse-line">"{{ line }}"</p>
+          }
+        </div>
+      </div>
+
+      <!-- Sección de pistas del búho -->
+      <div class="hints-section">
+        <div class="hints-header">
+          <span class="hints-title">🦉 Pistas del Búho ({{ revealedHintsCount() }}/{{ currentRiddle().hints.length }})</span>
+          @if (revealedHintsCount() < currentRiddle().hints.length && !isAnswerChecked()) {
+            <button type="button" class="btn-reveal-hint" (click)="revealNextHint()">
+              ✨ Revelar pista (+1)
+            </button>
+          }
+        </div>
+
+        @if (revealedHintsCount() > 0) {
+          <div class="hints-revealed-list anim-pop">
+            @for (hint of currentRiddle().hints.slice(0, revealedHintsCount()); track hint; let idx = $index) {
+              <div class="hint-item">
+                <span class="hint-bullet">💡 Pista {{ idx + 1 }}:</span>
+                <span class="hint-text">{{ hint }}</span>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Opciones de respuesta -->
+      <div class="answers-section">
+        <p class="answers-prompt">¿De qué o de quién habla la adivinanza?</p>
+        <div class="options-grid">
+          @for (opt of currentRiddle().options; track opt) {
+            <button 
+              type="button" 
+              class="riddle-option" 
+              [class.selected]="selectedOption() === opt"
+              [disabled]="isAnswerChecked()"
+              (click)="selectOption(opt)">
+              {{ opt }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Retroalimentación Pedagógica -->
+      @if (isAnswerChecked()) {
+        <div class="feedback-box anim-pop" [class.success]="isCorrect()" [class.wrong]="!isCorrect()">
+          <div class="feedback-badge">
+            {{ isCorrect() ? '🎉 ¡Acertaste, Gran Detective!' : '🦉 ¡Sigue practicando!' }}
+          </div>
+          <p class="feedback-note">{{ currentRiddle().educationalNote }}</p>
+        </div>
+      }
+
+      <!-- Botón de Acción -->
+      <div class="actions-bar">
+        @if (!isAnswerChecked()) {
+          <button 
+            type="button" 
+            class="btn-kid btn-purple" 
+            [disabled]="!selectedOption()"
+            (click)="checkAnswer()">
+            🔍 Adivinar respuesta
+          </button>
+        } @else {
+          <button 
+            type="button" 
+            class="btn-kid btn-amber anim-pop" 
+            (click)="nextRiddle()">
+            {{ currentIndex() === activeRiddles().length - 1 ? '🏁 Ver sabiduría final' : 'Siguiente adivinanza ➔' }}
+          </button>
+        }
+      </div>
+    </div>
+  } @else {
+    <!-- Pantalla de Victoria -->
+    <div class="victory-card anim-pop">
+      <div class="trophy-avatar anim-float">🦉</div>
+      <h2 class="victory-title">¡Mente Brillante y Poética!</h2>
+      <p class="victory-desc">Has descifrado los enigmas poéticos del sabio búho con gran destreza literaria.</p>
+
+      <div class="result-stats">
+        <div class="stat-box">
+          <span class="stat-number">{{ score() }}/{{ activeRiddles().length }}</span>
+          <span class="stat-label">Adivinanzas Resueltas</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">+{{ score() * 30 + 30 }}</span>
+          <span class="stat-label">Puntos XP</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">{{ score() >= 4 ? '⭐⭐⭐' : score() >= 2 ? '⭐⭐' : '⭐' }}</span>
+          <span class="stat-label">Estrellas</span>
+        </div>
+      </div>
+
+      <div class="victory-buttons">
+        <button type="button" class="btn-kid btn-purple" (click)="restartGame()">
+          🔄 Resolver de nuevo
+        </button>
+        <a routerLink="/" class="btn-kid btn-secondary">
+          🏠 Volver a la portada
+        </a>
+      </div>
+    </div>
+  }
+</div>

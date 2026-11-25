@@ -1,0 +1,95 @@
+<div class="game-container">
+  <!-- Cabecera del Juego -->
+  <div class="game-header">
+    <div class="header-left">
+      <a routerLink="/" class="back-btn" title="Volver al menú">← Volver</a>
+      <span class="game-badge blue">Juego 5</span>
+      <h1 class="game-title">Trivia: Rueda de las Letras</h1>
+    </div>
+    <div class="header-right">
+      <span class="progress-pill">Pregunta {{ currentIndex() + 1 }} de {{ activeQuestions().length }}</span>
+      <span class="streak-pill" [class.active]="currentStreak() > 1">🔥 Combo x{{ currentStreak() }}</span>
+    </div>
+  </div>
+
+  @if (!gameFinished()) {
+    <div class="trivia-card anim-pop">
+      <!-- Categoría de Trivia -->
+      <div class="trivia-category-badge">
+        <span>🏷️ {{ currentQuestion().category }}</span>
+      </div>
+
+      <!-- Pregunta para el niño -->
+      <div class="question-box">
+        <h2 class="question-text">{{ currentQuestion().question }}</h2>
+      </div>
+
+      <!-- Opciones de respuesta estilo botones pasteles grandes -->
+      <div class="options-container">
+        @for (opt of currentQuestion().options; track opt; let idx = $index) {
+          <button 
+            type="button" 
+            class="trivia-btn" 
+            [class.selected]="selectedIndex() === idx"
+            [class.correct]="isAnswerChecked() && idx === currentQuestion().correctIndex"
+            [class.wrong]="isAnswerChecked() && selectedIndex() === idx && idx !== currentQuestion().correctIndex"
+            [disabled]="isAnswerChecked()"
+            (click)="selectAnswer(idx)">
+            <span class="option-letter">{{ ['A', 'B', 'C', 'D'][idx] }}</span>
+            <span class="option-text">{{ opt }}</span>
+          </button>
+        }
+      </div>
+
+      <!-- Retroalimentación explicativa -->
+      @if (isAnswerChecked()) {
+        <div class="feedback-zone anim-pop" [class.success]="isCorrect()" [class.wrong]="!isCorrect()">
+          <div class="feedback-title">
+            {{ isCorrect() ? '🎉 ¡Respuesta Brillante!' : '💡 ¡Aprendamos juntos!' }}
+          </div>
+          <p class="feedback-detail">{{ currentQuestion().explanation }}</p>
+          <div class="feedback-action">
+            <button type="button" class="btn-kid btn-amber anim-pop" (click)="nextQuestion()">
+              {{ currentIndex() === activeQuestions().length - 1 ? '🏁 Ver medallas' : 'Siguiente pregunta ➔' }}
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <!-- Pantalla de Victoria -->
+    <div class="victory-card anim-pop">
+      <div class="trophy-avatar anim-float">🌟</div>
+      <h2 class="victory-title">¡Estrella de la Sabiduría!</h2>
+      <p class="victory-desc">Has completado la gran trivia de Lengua y Literatura demostrando ser un verdadero lector apasionado.</p>
+
+      <div class="result-stats">
+        <div class="stat-box">
+          <span class="stat-number">{{ score() }}/{{ activeQuestions().length }}</span>
+          <span class="stat-label">Aciertos</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">x{{ maxStreak() }}</span>
+          <span class="stat-label">Mejor Racha</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">+{{ score() * 25 + 30 }}</span>
+          <span class="stat-label">Puntos XP</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">{{ score() >= 5 ? '⭐⭐⭐' : score() >= 3 ? '⭐⭐' : '⭐' }}</span>
+          <span class="stat-label">Estrellas</span>
+        </div>
+      </div>
+
+      <div class="victory-buttons">
+        <button type="button" class="btn-kid btn-blue" (click)="restartGame()">
+          🔄 Jugar de nuevo
+        </button>
+        <a routerLink="/" class="btn-kid btn-secondary">
+          🏠 Volver al menú
+        </a>
+      </div>
+    </div>
+  }
+</div>

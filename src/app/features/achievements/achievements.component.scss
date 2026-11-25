@@ -1,0 +1,376 @@
+.achievements-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.page-header {
+  margin-bottom: 32px;
+
+  .back-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: inline-block;
+    margin-bottom: 8px;
+    &:hover { color: var(--pastel-coral); }
+  }
+
+  .page-title {
+    font-size: 2.1rem;
+    font-weight: 900;
+    color: var(--text-main);
+    margin-bottom: 4px;
+  }
+
+  .page-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+  }
+}
+
+.community-banner {
+  background: linear-gradient(135deg, #F0FDF4 0%, #EFF6FF 100%);
+  border-radius: var(--border-radius-lg);
+  padding: 28px 32px;
+  border: 2px solid rgba(78, 205, 196, 0.4);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px;
+  }
+
+  .banner-badge-wrapper {
+    flex-shrink: 0;
+
+    .community-icon {
+      font-size: 3.5rem;
+      background: #FFFFFF;
+      width: 80px;
+      height: 80px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(78, 205, 196, 0.25);
+      border: 2px solid rgba(78, 205, 196, 0.3);
+    }
+  }
+
+  .banner-content {
+    flex: 1;
+
+    .banner-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--pastel-mint-dark);
+      background: var(--pastel-mint-light);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .banner-title {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .banner-desc {
+      font-size: 0.98rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 16px;
+
+      strong {
+        color: var(--text-main);
+        font-weight: 800;
+      }
+    }
+
+    .community-stats-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #FFFFFF;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      flex-wrap: wrap;
+
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+
+      .pill-number {
+        font-weight: 900;
+        color: #B45309;
+        font-size: 0.9rem;
+      }
+
+      .pill-divider {
+        color: var(--text-light);
+        font-weight: bold;
+      }
+
+      .pill-label {
+        font-weight: 700;
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+      }
+    }
+  }
+}
+
+.avatar-card {
+  background: #FFFFFF;
+  border-radius: var(--border-radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  margin-bottom: 36px;
+
+  .avatar-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+
+    .avatar-preview {
+      font-size: 3rem;
+      background: var(--pastel-purple-light);
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-heading {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .card-subheading {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+  }
+
+  .avatars-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    .avatar-btn {
+      font-size: 2rem;
+      background: var(--bg-card-subtle);
+      border: 2px solid var(--border-subtle);
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+
+      &:hover {
+        transform: scale(1.1);
+        border-color: var(--pastel-purple);
+      }
+
+      &.selected {
+        background: var(--pastel-purple-light);
+        border-color: var(--pastel-purple);
+        box-shadow: 0 4px 0 var(--pastel-purple-dark);
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+.medals-section {
+  margin-bottom: 40px;
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+  }
+
+  .medals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .medal-card {
+    background: #FFFFFF;
+    border-radius: var(--border-radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s;
+
+    &:hover { transform: translateY(-4px); }
+
+    &.unlocked {
+      border-color: var(--pastel-amber);
+      background: linear-gradient(180deg, #FFFFFF 0%, #FFFDF7 100%);
+      .medal-icon-wrapper {
+        background: var(--pastel-amber-light);
+        border-color: var(--pastel-amber);
+      }
+    }
+
+    &.locked {
+      opacity: 0.65;
+      filter: grayscale(0.5);
+      .medal-icon-wrapper {
+        background: #F1F5F9;
+        border-color: #CBD5E0;
+      }
+    }
+
+    .medal-icon-wrapper {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 3px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+
+      .medal-icon {
+        font-size: 2.4rem;
+      }
+    }
+
+    .medal-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .medal-description {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.35;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .status-pill {
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 9999px;
+
+      &.unlocked {
+        background: var(--pastel-mint-light);
+        color: var(--pastel-mint-dark);
+      }
+      &.locked {
+        background: #F1F5F9;
+        color: var(--text-secondary);
+      }
+    }
+  }
+}
+
+.diploma-card {
+  background: #FFFDF9;
+  border-radius: var(--border-radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 32px;
+
+  .diploma-border {
+    border: 3px dashed var(--pastel-amber);
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .diploma-header {
+    margin-bottom: 16px;
+    .diploma-stamp {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: #996200;
+      letter-spacing: 1px;
+    }
+    .diploma-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--text-main);
+      margin-top: 4px;
+    }
+  }
+
+  .diploma-body {
+    font-size: 1.05rem;
+    color: #4A3B12;
+    line-height: 1.6;
+    max-width: 640px;
+    margin: 0 auto 28px;
+  }
+
+  .diploma-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    .signature {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      .sign-owl {
+        font-weight: 800;
+        font-size: 1rem;
+        color: var(--text-main);
+      }
+      .sign-role {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+    }
+  }
+}
+
+.reset-zone {
+  text-align: center;
+  margin-top: 24px;
+  .reset-link {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    cursor: pointer;
+    text-decoration: underline;
+    &:hover { color: var(--pastel-coral); }
+  }
+}

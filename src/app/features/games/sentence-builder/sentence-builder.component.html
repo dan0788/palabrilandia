@@ -1,0 +1,129 @@
+<div class="game-container">
+  <!-- Cabecera del Juego -->
+  <div class="game-header">
+    <div class="header-left">
+      <a routerLink="/" class="back-btn" title="Volver al menú">← Volver</a>
+      <span class="game-badge coral">Juego 4</span>
+      <h1 class="game-title">El Taller de Fábulas y Versos</h1>
+    </div>
+    <div class="header-right">
+      <span class="progress-pill">Fábula {{ currentIndex() + 1 }} de {{ activePuzzles().length }}</span>
+      <span class="score-pill">⭐ {{ score() }} ordenadas</span>
+    </div>
+  </div>
+
+  @if (!gameFinished()) {
+    <div class="builder-card anim-pop">
+      <!-- Título de la Fábula u Obra -->
+      <div class="fable-header">
+        <div class="fable-meta">
+          <span class="fable-tag">📜 Historia:</span>
+          <span class="fable-name">{{ currentPuzzle().title }}</span>
+          <span class="fable-source">({{ currentPuzzle().authorOrSource }})</span>
+        </div>
+        <button type="button" class="btn-reset-order" (click)="resetCurrentWords()" [disabled]="placedWords().length === 0">
+          🔄 Deshacer
+        </button>
+      </div>
+
+      <!-- Zona de ensamblado (Línea donde se colocan las palabras) -->
+      <div class="workbench-zone" [class.correct]="isAnswerChecked() && isCorrect()" [class.wrong]="isAnswerChecked() && !isCorrect()">
+        <span class="workbench-label">Tu oración construida (toca las tarjetas para colocarlas o quitarlas):</span>
+        <div class="placed-words-line">
+          @if (placedWords().length === 0) {
+            <div class="empty-placeholder">
+              <span>Arrastra o toca las palabras de abajo para armar la historia aquí...</span>
+            </div>
+          } @else {
+            @for (word of placedWords(); track $index; let idx = $index) {
+              <button 
+                type="button" 
+                class="word-block placed anim-pop" 
+                [disabled]="isAnswerChecked()"
+                (click)="removeWord(word, idx)">
+                {{ word }}
+                <span class="remove-chip-x">✕</span>
+              </button>
+            }
+          }
+        </div>
+      </div>
+
+      <!-- Banco de Palabras disponibles -->
+      <div class="word-bank-zone">
+        <p class="bank-instruction">Palabras disponibles para ordenar:</p>
+        <div class="available-words-grid">
+          @for (word of availableWords(); track $index; let idx = $index) {
+            <button 
+              type="button" 
+              class="word-block available anim-pop" 
+              (click)="placeWord(word, idx)">
+              {{ word }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Retroalimentación Pedagógica / Moraleja -->
+      @if (isAnswerChecked()) {
+        <div class="feedback-zone anim-pop" [class.success]="isCorrect()" [class.error]="!isCorrect()">
+          <div class="feedback-badge">
+            {{ isCorrect() ? '🎉 ¡Magnífica Construcción Literaria!' : '🧐 ¡Casi casi!' }}
+          </div>
+          <p class="feedback-moral">{{ currentPuzzle().moralOrExplanation }}</p>
+        </div>
+      }
+
+      <!-- Barra de Acciones -->
+      <div class="actions-bar">
+        @if (!isAnswerChecked()) {
+          <button 
+            type="button" 
+            class="btn-kid btn-coral" 
+            [disabled]="availableWords().length > 0"
+            (click)="checkOrder()">
+            ✨ Comprobar orden de la fábula
+          </button>
+        } @else {
+          <button 
+            type="button" 
+            class="btn-kid btn-amber anim-pop" 
+            (click)="nextPuzzle()">
+            {{ currentIndex() === activePuzzles().length - 1 ? '🏁 Ver resultado final' : 'Siguiente fábula ➔' }}
+          </button>
+        }
+      </div>
+    </div>
+  } @else {
+    <!-- Pantalla de Victoria -->
+    <div class="victory-card anim-pop">
+      <div class="trophy-avatar anim-float">📜</div>
+      <h2 class="victory-title">¡Gran Maestro Constructor!</h2>
+      <p class="victory-desc">Has ordenado las palabras con gran sentido poético, respetando el sujeto, el verbo y las moralejas.</p>
+
+      <div class="result-stats">
+        <div class="stat-box">
+          <span class="stat-number">{{ score() }}/{{ activePuzzles().length }}</span>
+          <span class="stat-label">Fábulas Completadas</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">+{{ score() * 35 + 25 }}</span>
+          <span class="stat-label">Puntos XP</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">{{ score() >= 3 ? '⭐⭐⭐' : '⭐⭐' }}</span>
+          <span class="stat-label">Estrellas</span>
+        </div>
+      </div>
+
+      <div class="victory-buttons">
+        <button type="button" class="btn-kid btn-coral" (click)="restartGame()">
+          🔄 Ordenar de nuevo
+        </button>
+        <a routerLink="/" class="btn-kid btn-secondary">
+          🏠 Volver a juegos
+        </a>
+      </div>
+    </div>
+  }
+</div>

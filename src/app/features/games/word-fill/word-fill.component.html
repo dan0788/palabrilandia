@@ -1,0 +1,125 @@
+<div class="game-container">
+  <!-- Cabecera del Juego -->
+  <div class="game-header">
+    <div class="header-left">
+      <a routerLink="/" class="back-btn" title="Volver al menú">← Volver</a>
+      <span class="game-badge mint">Juego 1</span>
+      <h1 class="game-title">Palabras al Rescate</h1>
+    </div>
+    <div class="header-right">
+      <span class="progress-pill">Reto {{ currentIndex() + 1 }} de {{ activeQuestions().length }}</span>
+      <span class="score-pill">⭐ {{ score() }} aciertos</span>
+    </div>
+  </div>
+
+  @if (!gameFinished()) {
+    <div class="play-card anim-pop">
+      <!-- Categoría de Lengua -->
+      <div class="category-tag" [class]="currentQuestion().category.toLowerCase()">
+        <span>📚 Área: {{ currentQuestion().category }}</span>
+        <button type="button" class="hint-btn" (click)="toggleHint()">
+          💡 {{ showHint() ? 'Ocultar pista' : 'Pedir pista' }}
+        </button>
+      </div>
+
+      @if (showHint()) {
+        <div class="hint-box anim-pop">
+          <span>🧐 <strong>Pista de Plumi:</strong> {{ currentQuestion().hint }}</span>
+        </div>
+      }
+
+      <!-- Frase con el espacio para rellenar -->
+      <div class="sentence-stage">
+        <span class="sentence-text">{{ currentQuestion().sentenceBefore }}</span>
+        
+        <div class="word-slot" [class.filled]="selectedOption()" [class.correct]="isAnswerChecked() && isCorrect()" [class.wrong]="isAnswerChecked() && !isCorrect()">
+          @if (selectedOption()) {
+            <span class="slot-word">{{ selectedOption() }}</span>
+          } @else {
+            <span class="slot-placeholder">¿Qué palabra va aquí?</span>
+          }
+        </div>
+
+        <span class="sentence-text">{{ currentQuestion().sentenceAfter }}</span>
+      </div>
+
+      <!-- Opciones interactivas -->
+      <div class="options-container">
+        <p class="instruction-text">Toca la palabra correcta para completar la oración:</p>
+        <div class="options-grid">
+          @for (opt of currentQuestion().options; track opt) {
+            <button 
+              type="button" 
+              class="option-chip" 
+              [class.selected]="selectedOption() === opt"
+              [disabled]="isAnswerChecked()"
+              (click)="selectOption(opt)">
+              {{ opt }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Retroalimentación explicativa -->
+      @if (isAnswerChecked()) {
+        <div class="feedback-card anim-pop" [class.success]="isCorrect()" [class.error]="!isCorrect()">
+          <div class="feedback-header">
+            <span class="feedback-icon">{{ isCorrect() ? '🎉 ¡Fantástico!' : '💡 ¡Casi lo tienes!' }}</span>
+          </div>
+          <p class="feedback-explanation">{{ currentQuestion().explanation }}</p>
+        </div>
+      }
+
+      <!-- Barra de Acciones -->
+      <div class="actions-bar">
+        @if (!isAnswerChecked()) {
+          <button 
+            type="button" 
+            class="btn-kid btn-mint" 
+            [disabled]="!selectedOption()"
+            (click)="checkAnswer()">
+            ✅ Comprobar palabra
+          </button>
+        } @else {
+          <button 
+            type="button" 
+            class="btn-kid btn-amber anim-pop" 
+            (click)="nextQuestion()">
+            {{ currentIndex() === activeQuestions().length - 1 ? '🏁 Ver resultados' : 'Siguiente reto ➔' }}
+          </button>
+        }
+      </div>
+    </div>
+  } @else {
+    <!-- Pantalla Final de Resultados -->
+    <div class="victory-card anim-pop">
+      <div class="trophy-avatar anim-float">🏆</div>
+      <h2 class="victory-title">¡Misión Cumplida, Explorador!</h2>
+      <p class="victory-desc">Has rescatado todas las palabras con gran maestría ortográfica y gramatical.</p>
+
+      <div class="result-stats">
+        <div class="stat-box">
+          <span class="stat-number">{{ score() }}/{{ activeQuestions().length }}</span>
+          <span class="stat-label">Aciertos</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">+{{ score() * 25 + 20 }}</span>
+          <span class="stat-label">Puntos XP</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">{{ score() >= 5 ? '⭐⭐⭐' : score() >= 3 ? '⭐⭐' : '⭐' }}</span>
+          <span class="stat-label">Estrellas</span>
+        </div>
+      </div>
+
+      <div class="victory-buttons">
+        <button type="button" class="btn-kid btn-amber" (click)="restartGame()">
+          🔄 Jugar de nuevo
+        </button>
+        <a routerLink="/" class="btn-kid btn-secondary">
+          🏠 Volver a juegos
+        </a>
+      </div>
+    </div>
+  }
+</div>

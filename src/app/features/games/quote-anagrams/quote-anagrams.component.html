@@ -1,0 +1,100 @@
+<div class="game-container">
+  <div class="game-header">
+    <div class="header-left">
+      <a routerLink="/" class="back-btn" title="Volver al menú">← Volver</a>
+      <span class="game-badge blue">Juego 12 • Criptografía Poética</span>
+      <h1 class="game-title">El Descifrador del 27</h1>
+    </div>
+    <div class="header-right">
+      <span class="progress-pill">Cita {{ currentIndex() + 1 }} de {{ activeChallenges().length }}</span>
+      <button type="button" class="clue-btn" (click)="toggleClue()">💡 {{ showClue() ? 'Ocultar Pista' : 'Pedir Pista' }}</button>
+    </div>
+  </div>
+
+  @if (!gameFinished()) {
+    <div class="anagram-card anim-pop">
+      <!-- Ficha de la obra -->
+      <div class="quote-source-header">
+        <span class="source-tag">Autor & Obra:</span>
+        <span class="author-name">{{ currentChallenge().author }}</span>
+        <span class="work-title">({{ currentChallenge().work }})</span>
+      </div>
+
+      @if (showClue()) {
+        <div class="clue-box anim-pop">
+          <span>🧐 <strong>Pista de Plumi:</strong> {{ currentChallenge().clue }}</span>
+        </div>
+      }
+
+      <!-- Anagramas a descifrar -->
+      <div class="anagrams-container">
+        <p class="instruction-text">Ordena mentalmente las letras revueltas y escribe la palabra correcta:</p>
+        <div class="anagram-slots-grid">
+          @for (scrambled of currentChallenge().scrambledKeywords; track $index; let idx = $index) {
+            <div class="anagram-slot-item" [class.solved]="solvedSlots()[idx]">
+              <div class="scrambled-badge">
+                <span class="scrambled-text">{{ scrambled }}</span>
+              </div>
+              <div class="input-wrapper">
+                @if (solvedSlots()[idx]) {
+                  <span class="solved-word anim-pop">✅ {{ solvedSlots()[idx] }}</span>
+                } @else {
+                  <input 
+                    type="text" 
+                    #inputBox
+                    class="word-input" 
+                    placeholder="Tu palabra..." 
+                    (keyup.enter)="testWord(idx, inputBox.value); inputBox.value = ''"
+                    (blur)="testWord(idx, inputBox.value); inputBox.value = ''">
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Cita Revelada en caso de resolver -->
+      @if (isCurrentSolved()) {
+        <div class="full-quote-reveal anim-pop">
+          <div class="reveal-header">🎉 ¡Verso Descifrado por Completo!</div>
+          <blockquote class="reveal-quote">{{ currentChallenge().fullQuote }}</blockquote>
+          <div class="action-row">
+            <button type="button" class="btn-kid btn-amber anim-pop" (click)="nextChallenge()">
+              {{ currentIndex() === activeChallenges().length - 1 ? '🏁 Ver sabiduría final' : 'Siguiente cita ➔' }}
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="victory-card anim-pop">
+      <div class="trophy-avatar anim-float">🧩</div>
+      <h2 class="victory-title">¡Criptógrafo de la Literatura!</h2>
+      <p class="victory-desc">Has resuelto los anagramas y restituido las palabras a sus versos y autores legendarios.</p>
+
+      <div class="result-stats">
+        <div class="stat-box">
+          <span class="stat-number">{{ score() }}/{{ activeChallenges().length }}</span>
+          <span class="stat-label">Citas Descifradas</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">+{{ score() * 40 + 35 }}</span>
+          <span class="stat-label">Puntos XP</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">{{ score() >= 3 ? '⭐⭐⭐' : '⭐⭐' }}</span>
+          <span class="stat-label">Estrellas</span>
+        </div>
+      </div>
+
+      <div class="victory-buttons">
+        <button type="button" class="btn-kid btn-blue" (click)="restartGame()">
+          🔄 Descifrar nuevas citas
+        </button>
+        <a routerLink="/" class="btn-kid btn-secondary">
+          🏠 Volver al inicio
+        </a>
+      </div>
+    </div>
+  }
+</div>

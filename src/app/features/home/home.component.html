@@ -1,0 +1,119 @@
+<div class="home-container">
+  <!-- Saludo y Mascota Plumi -->
+  <app-mascot></app-mascot>
+
+  <!-- Banner Hero Minimalista Infantil -->
+  <section class="hero-section anim-pop">
+    <div class="hero-content">
+      <span class="hero-badge">Aventura Gamificada para Primaria y Bachillerato</span>
+      <h1 class="hero-title">¡Aprende Lengua y Literatura Jugando!</h1>
+      <p class="hero-desc">
+        Descubre el poder de las palabras, viaja por cuentos clásicos y obras modernas, analiza oraciones compuestas y resuelve retos aleatorios diseñados para todos los niveles escolares.
+      </p>
+      <div class="hero-stats-row">
+        <div class="hero-stat-item">
+          <span class="stat-number">12</span>
+          <span class="stat-desc">Juegos Interactivos</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="stat-number">100+</span>
+          <span class="stat-desc">Retos Aleatorios</span>
+        </div>
+        <div class="hero-stat-item">
+          <span class="stat-number">14</span>
+          <span class="stat-desc">Medallas de Maestría</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-illustration">
+      <div class="bookshelf-card anim-float">
+        <span class="floating-emoji e1">📖</span>
+        <span class="floating-emoji e2">✨</span>
+        <span class="floating-emoji e3">🦉</span>
+        <span class="floating-emoji e4">✏️</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de los 12 Juegos Interactivos (Primaria y Bachillerato) -->
+  <section class="games-section">
+    <div class="section-header">
+      <div class="header-titles">
+        <h2 class="section-title">Elige tu Aventura de Hoy</h2>
+        <p class="section-subtitle">Cada juego te otorgará puntos de experiencia (XP), estrellas y medallas especiales.</p>
+      </div>
+
+      <!-- Filtro interactivo de niveles -->
+      <div class="level-filters">
+        <button 
+          class="filter-pill" 
+          [class.active]="selectedFilter() === 'todos'" 
+          (click)="setFilter('todos')">
+          🌟 Todos (12)
+        </button>
+        <button 
+          class="filter-pill" 
+          [class.active]="selectedFilter() === 'primaria'" 
+          (click)="setFilter('primaria')">
+          🌱 Nivel Primaria (5)
+        </button>
+        <button 
+          class="filter-pill" 
+          [class.active]="selectedFilter() === 'bachillerato'" 
+          (click)="setFilter('bachillerato')">
+          🎓 Nivel Bachillerato (7)
+        </button>
+      </div>
+    </div>
+
+    <div class="games-grid">
+      @for (game of filteredGames(); track game.id) {
+        <a [routerLink]="game.route" class="game-card anim-pop" [class]="game.colorClass" (mouseenter)="onGameHover()">
+          <div class="card-top">
+            <span class="game-number">{{ game.number }}</span>
+            <span class="game-level-tag" [class.bachillerato]="game.level === 'bachillerato'">
+              {{ game.level === 'bachillerato' ? '🎓 Bachillerato' : '🌱 Primaria' }}
+            </span>
+          </div>
+          
+          <div class="card-icon-wrapper">
+            <span class="card-icon">{{ game.icon }}</span>
+          </div>
+
+          <h3 class="card-title">{{ game.title }}</h3>
+          <h4 class="card-subtitle">{{ game.subtitle }}</h4>
+          <p class="card-description">{{ game.description }}</p>
+
+          <div class="skills-row">
+            @for (sk of game.skills; track sk) {
+              <span class="skill-tag">{{ sk }}</span>
+            }
+          </div>
+
+          <div class="card-action">
+            <span class="play-label">¡Jugar ahora! ➔</span>
+          </div>
+        </a>
+      }
+    </div>
+  </section>
+
+  <!-- Barra de progreso del nivel actual -->
+  <section class="level-progress-card anim-pop">
+    <div class="progress-info">
+      <div class="level-badge">
+        <span class="level-icon">{{ gamification.selectedAvatar() }}</span>
+        <div>
+          <h3 class="level-name">Nivel {{ gamification.level().number }}: {{ gamification.level().title }}</h3>
+          <p class="level-xp-text">{{ gamification.xp() }} XP acumulados • Siguiente nivel en {{ gamification.level().nextXp }} XP</p>
+        </div>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" [style.width.%]="gamification.level().progress"></div>
+      </div>
+    </div>
+    <a routerLink="/logros" class="btn-kid btn-amber">
+      🏆 Ver mis medallas y avatar
+    </a>
+  </section>
+</div>

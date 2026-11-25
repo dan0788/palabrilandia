@@ -1,0 +1,101 @@
+<div class="game-container">
+  <!-- Cabecera del Juego -->
+  <div class="game-header">
+    <div class="header-left">
+      <a routerLink="/" class="back-btn" title="Volver al menú">← Volver</a>
+      <span class="game-badge amber">{{ currentLevelBadge() }}</span>
+      <h1 class="game-title">Caza de Letras Literarias</h1>
+    </div>
+    <div class="header-right">
+      <span class="progress-pill">{{ currentBoardTitle() }}</span>
+      <span class="progress-pill">Encontradas: {{ foundCount() }}/{{ totalWords() }}</span>
+      <button type="button" class="hint-btn" (click)="giveHint()">💡 Pista</button>
+    </div>
+  </div>
+
+  @if (!gameFinished()) {
+    <div class="game-layout">
+      <!-- Panel de la Cuadrícula -->
+      <div class="grid-card anim-pop">
+        <div class="grid-controls">
+          <p class="instruction">Haz clic en las letras en orden para formar las palabras:</p>
+          <button type="button" class="clear-btn" (click)="clearSelection()" [disabled]="selectedCells().length === 0">
+            Limpiar selección
+          </button>
+        </div>
+
+        <div class="word-grid">
+          @for (row of grid(); track $index; let r = $index) {
+            <div class="grid-row">
+              @for (cell of row; track $index; let c = $index) {
+                <button 
+                  type="button" 
+                  class="grid-cell" 
+                  [class.selected]="isCellSelected(r, c)"
+                  [class.found]="cell.foundColor"
+                  [style.backgroundColor]="cell.foundColor ? cell.foundColor : null"
+                  (click)="onCellClick(r, c)">
+                  {{ cell.letter }}
+                </button>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Panel Lateral: Lista de Palabras y Definiciones -->
+      <div class="words-card anim-pop">
+        <h2 class="card-subtitle">📜 Palabras por encontrar</h2>
+        <div class="word-list">
+          @for (item of words(); track item.word) {
+            <div class="word-item" [class.done]="item.found">
+              <div class="word-badge" [style.borderColor]="item.color">
+                <span class="status-check">{{ item.found ? '✅' : '🔍' }}</span>
+                <span class="target-name">{{ item.word }}</span>
+              </div>
+              <p class="word-clue">{{ item.clue }}</p>
+            </div>
+          }
+        </div>
+
+        @if (lastDiscoveredWord()) {
+          <div class="discovery-alert anim-pop">
+            <span class="discovery-title">✨ ¡Última palabra hallada!</span>
+            <p class="discovery-body"><strong>{{ lastDiscoveredWord()?.word }}:</strong> {{ lastDiscoveredWord()?.clue }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  } @else {
+    <!-- Pantalla de Victoria -->
+    <div class="victory-card anim-pop">
+      <div class="trophy-avatar anim-float">🦅</div>
+      <h2 class="victory-title">¡Ojo de Halcón Literario!</h2>
+      <p class="victory-desc">¡Has localizado todas las palabras clave de la literatura en la sopa de letras!</p>
+
+      <div class="result-stats">
+        <div class="stat-box">
+          <span class="stat-number">{{ foundCount() }}/{{ totalWords() }}</span>
+          <span class="stat-label">Palabras Halladas</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">+150</span>
+          <span class="stat-label">Puntos XP</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">⭐⭐⭐</span>
+          <span class="stat-label">Estrellas</span>
+        </div>
+      </div>
+
+      <div class="victory-buttons">
+        <button type="button" class="btn-kid btn-amber" (click)="restartGame()">
+          🔄 Jugar de nuevo
+        </button>
+        <a routerLink="/" class="btn-kid btn-secondary">
+          🏠 Volver al inicio
+        </a>
+      </div>
+    </div>
+  }
+</div>

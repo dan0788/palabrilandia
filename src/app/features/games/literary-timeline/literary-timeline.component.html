@@ -1,0 +1,105 @@
+<div class="game-container">
+  <div class="game-header">
+    <div class="header-left">
+      <a routerLink="/" class="back-btn" title="Volver al menú">← Volver</a>
+      <span class="game-badge purple">Juego 7 • Bachillerato</span>
+      <h1 class="game-title">Cronos Literario: Movimientos y Autores</h1>
+    </div>
+    <div class="header-right">
+      <span class="progress-pill">Reto {{ currentIndex() + 1 }} de {{ activeChallenges().length }}</span>
+      <span class="score-pill">⭐ {{ score() }} aciertos</span>
+    </div>
+  </div>
+
+  @if (!gameFinished()) {
+    <div class="timeline-card anim-pop">
+      <!-- Ficha del Autor y Cita -->
+      <div class="author-dossier">
+        <div class="dossier-badge">🏛️ Expediente Literario</div>
+        <h2 class="dossier-author">{{ currentChallenge().authorOrWork }}</h2>
+        <p class="dossier-desc">{{ currentChallenge().description }}</p>
+        
+        <div class="quote-box">
+          <span class="quote-tag">Fragmento Clave:</span>
+          <p class="quote-text">{{ currentChallenge().keyFragment }}</p>
+        </div>
+      </div>
+
+      <!-- Opciones de Corrientes Literarias -->
+      <div class="options-section">
+        <p class="section-prompt">¿A qué corriente, generación o movimiento estético pertenece?</p>
+        <div class="options-grid">
+          @for (mov of currentChallenge().options; track mov) {
+            <button 
+              type="button" 
+              class="timeline-btn" 
+              [class.selected]="selectedMovement() === mov"
+              [disabled]="isAnswerChecked()"
+              (click)="selectMovement(mov)">
+              {{ mov }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Retroalimentación Pedagógica -->
+      @if (isAnswerChecked()) {
+        <div class="feedback-card anim-pop" [class.success]="isCorrect()" [class.wrong]="!isCorrect()">
+          <div class="feedback-title">
+            {{ isCorrect() ? '🏛️ ¡Acierto Histórico-Literario!' : '💡 ¡Aprendizaje de época!' }}
+          </div>
+          <p class="feedback-desc">{{ currentChallenge().explanation }}</p>
+        </div>
+      }
+
+      <div class="actions-bar">
+        @if (!isAnswerChecked()) {
+          <button 
+            type="button" 
+            class="btn-kid btn-purple" 
+            [disabled]="!selectedMovement()"
+            (click)="checkAnswer()">
+            📜 Confirmar Movimiento
+          </button>
+        } @else {
+          <button 
+            type="button" 
+            class="btn-kid btn-amber anim-pop" 
+            (click)="nextChallenge()">
+            {{ currentIndex() === activeChallenges().length - 1 ? '🏁 Ver sabiduría final' : 'Siguiente autor ➔' }}
+          </button>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="victory-card anim-pop">
+      <div class="trophy-avatar anim-float">🏛️</div>
+      <h2 class="victory-title">¡Erudito de las Letras Modernas!</h2>
+      <p class="victory-desc">Has demostrado conocer a fondo los movimientos, autores y manifiestos de la literatura en español.</p>
+
+      <div class="result-stats">
+        <div class="stat-box">
+          <span class="stat-number">{{ score() }}/{{ activeChallenges().length }}</span>
+          <span class="stat-label">Movimientos Acertados</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">+{{ score() * 35 + 30 }}</span>
+          <span class="stat-label">Puntos XP</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">{{ score() >= 4 ? '⭐⭐⭐' : score() >= 2 ? '⭐⭐' : '⭐' }}</span>
+          <span class="stat-label">Estrellas</span>
+        </div>
+      </div>
+
+      <div class="victory-buttons">
+        <button type="button" class="btn-kid btn-purple" (click)="restartGame()">
+          🔄 Jugar de nuevo
+        </button>
+        <a routerLink="/" class="btn-kid btn-secondary">
+          🏠 Volver a juegos
+        </a>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,64 @@
+<header class="app-header">
+  <div class="header-container">
+    <!-- Logotipo y Nombre -->
+    <a routerLink="/" class="brand-logo">
+      <div class="logo-icon anim-float">📚</div>
+      <div class="logo-text">
+        <span class="logo-title">Palabrilandia</span>
+        <span class="logo-subtitle">Lengua & Literatura</span>
+      </div>
+    </a>
+
+    <!-- Navegación Principal -->
+    <nav class="nav-links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-item">
+        <span class="nav-icon">🎮</span>
+        <span class="nav-label">Juegos</span>
+      </a>
+      <a routerLink="/logros" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">🏆</span>
+        <span class="nav-label">Medallas</span>
+      </a>
+      <a routerLink="/biblioteca" routerLinkActive="active" class="nav-item">
+        <span class="nav-icon">📖</span>
+        <span class="nav-label">Biblioteca</span>
+      </a>
+    </nav>
+
+    <!-- Barra de Estado Gamificada (Puntos, Estrellas, Sonido) -->
+    <div class="user-stats-bar">
+      <!-- Racha diaria -->
+      <div class="stat-pill amber" title="Racha de días jugando">
+        <span class="stat-icon">🔥</span>
+        <span class="stat-value">{{ gamification.streak() }}d</span>
+      </div>
+
+      <!-- Estrellas acumuladas -->
+      <div class="stat-pill amber" title="Estrellas de maestría">
+        <span class="stat-icon">⭐</span>
+        <span class="stat-value">{{ gamification.stars() }}</span>
+      </div>
+
+      <!-- Puntos de Experiencia (XP) -->
+      <div class="stat-pill mint" title="Puntos de experiencia XP">
+        <span class="stat-icon">✨</span>
+        <span class="stat-value">{{ gamification.xp() }} XP</span>
+      </div>
+
+      <!-- Nivel del niño con su Avatar -->
+      <div class="stat-pill purple" [title]="'Nivel actual: ' + gamification.level().title">
+        <span class="stat-avatar">{{ gamification.selectedAvatar() }}</span>
+        <span class="stat-value">Nv. {{ gamification.level().number }}</span>
+      </div>
+
+      <!-- Botón de sonido -->
+      <button 
+        type="button" 
+        (click)="onSoundToggle()" 
+        class="sound-toggle-btn" 
+        [title]="sound.isMuted() ? 'Activar sonido' : 'Silenciar sonido'">
+        {{ sound.isMuted() ? '🔇' : '🔊' }}
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,105 @@
+<div class="achievements-container">
+  <!-- Cabecera -->
+  <div class="page-header">
+    <a routerLink="/" class="back-link">← Volver al inicio</a>
+    <h1 class="page-title">🏆 Salón de Medallas y Logros</h1>
+    <p class="page-subtitle">Aquí guardas tus tesoros lectores y personalizas tu personaje de aventuras.</p>
+  </div>
+
+  <!-- Banner de Puntuación Colectiva y Comunitaria -->
+  <div class="community-banner anim-pop">
+    <div class="banner-badge-wrapper">
+      <span class="community-icon anim-float">🌍</span>
+    </div>
+    <div class="banner-content">
+      <div class="banner-tag">🤝 Puntuación y Sabiduría Colectiva</div>
+      <h2 class="banner-title">¡Aprendemos y Crecemos Juntos!</h2>
+      <p class="banner-desc">
+        En nuestra plataforma escolar, el aprendizaje es un viaje compartido: 
+        <strong>el puntaje y los puntos de experiencia (XP) se acumulan en conjunto entre todos los usuarios que usan la app</strong>. 
+        ¡Cada reto ortográfico, acertijo poético y oración analizada suma al gran marcador colectivo de nuestra comunidad!
+      </p>
+      <div class="community-stats-pill">
+        <span class="pill-number">⭐ {{ gamification.xp() }} XP Colectivos Acumulados</span>
+        <span class="pill-divider">•</span>
+        <span class="pill-label">Nivel Comunitario: {{ gamification.level().title }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Selector de Avatar -->
+  <div class="avatar-card anim-pop">
+    <div class="avatar-header">
+      <span class="avatar-preview">{{ gamification.selectedAvatar() }}</span>
+      <div>
+        <h2 class="card-heading">Tu Personaje Lector</h2>
+        <p class="card-subheading">Elige el animal que te acompañará en todas las partidas:</p>
+      </div>
+    </div>
+    <div class="avatars-grid">
+      @for (av of avatars; track av) {
+        <button 
+          type="button" 
+          class="avatar-btn" 
+          [class.selected]="gamification.selectedAvatar() === av"
+          (click)="selectAvatar(av)">
+          {{ av }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Galería de Medallas -->
+  <div class="medals-section">
+    <h2 class="section-title">Colección de Medallas de Honor</h2>
+    <div class="medals-grid">
+      @for (b of gamification.badges(); track b.id) {
+        <div class="medal-card anim-pop" [class.unlocked]="b.unlocked" [class.locked]="!b.unlocked">
+          <div class="medal-icon-wrapper">
+            <span class="medal-icon">{{ b.unlocked ? b.icon : '🔒' }}</span>
+          </div>
+          <h3 class="medal-title">{{ b.title }}</h3>
+          <p class="medal-description">{{ b.description }}</p>
+          <div class="medal-status">
+            @if (b.unlocked) {
+              <span class="status-pill unlocked">✅ Desbloqueada</span>
+            } @else {
+              <span class="status-pill locked">🎯 {{ b.requirementText }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Diploma de Honor Interactivo -->
+  <div class="diploma-card anim-pop">
+    <div class="diploma-border">
+      <div class="diploma-header">
+        <span class="diploma-stamp">📜 DIPLOMA DE MAESTRÍA LECTORA 📜</span>
+        <h2 class="diploma-title">Certificado de Excelencia en Lengua y Literatura</h2>
+      </div>
+      <p class="diploma-body">
+        Se certifica que el estudiante y explorador literario {{ gamification.selectedAvatar() }} ha contribuido al 
+        <strong>Nivel Comunitario {{ gamification.level().number }}: {{ gamification.level().title }}</strong>, 
+        aportando al marcador colectivo con <strong>{{ gamification.xp() }} puntos de sabiduría acumulada</strong> en conjunto entre todos los usuarios de la plataforma y demostrando maestría en ortografía, fábulas, sintaxis compuesta y literatura universal.
+      </p>
+      <div class="diploma-footer">
+        <div class="signature">
+          <span class="sign-owl">🦉 Plumi el Búho</span>
+          <span class="sign-role">Director de Palabrilandia</span>
+        </div>
+        <button type="button" class="btn-kid btn-amber" (click)="celebrateCertificate()">
+          🎉 Celebrar mi diploma con confeti
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zona de reinicio -->
+  <div class="reset-zone">
+    <button type="button" class="reset-link" (click)="resetAll()">
+      Reiniciar progreso y empezar desde cero
+    </button>
+  </div>
+</div>

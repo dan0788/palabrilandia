@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="pastelBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ECDC4"/>
+      <stop offset="100%" stop-color="#54A0FF"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  <!-- Fondo redondeado suave estilo pastel infantil -->
+  <rect width="100" height="100" rx="26" fill="url(#pastelBg)"/>
+  <rect x="3" y="3" width="94" height="94" rx="23" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-opacity="0.4"/>
+  
+  <!-- Ícono principal de libros literarios -->
+  <text x="50" y="55" font-family="'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif" font-size="52" text-anchor="middle" dominant-baseline="central" filter="url(#softShadow)">📚</text>
+  
+  <!-- Estrella de maestría en la esquina -->
+  <circle cx="80" cy="22" r="10" fill="#FFD166"/>
+  <text x="80" y="23" font-family="'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif" font-size="11" text-anchor="middle" dominant-baseline="central">✨</text>
+</svg>

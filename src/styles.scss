@@ -1,0 +1,242 @@
+/* ==========================================================================
+   PALABRILANDIA - SISTEMA DE DISEÑO MINIMALISTA INFANTIL
+   Paleta de colores pasteles, bordes suaves y microinteracciones lúdicas
+   ========================================================================== */
+
+:root {
+  /* Paleta Pastel Infantil */
+  --pastel-mint: #4ECDC4;
+  --pastel-mint-light: #EBF8F6;
+  --pastel-mint-dark: #36B4AB;
+
+  --pastel-amber: #FFD166;
+  --pastel-amber-light: #FFF9EB;
+  --pastel-amber-dark: #F5B838;
+
+  --pastel-coral: #FF6B6B;
+  --pastel-coral-light: #FFEFEF;
+  --pastel-coral-dark: #E84D4D;
+
+  --pastel-blue: #54A0FF;
+  --pastel-blue-light: #EFF6FF;
+  --pastel-blue-dark: #3782E5;
+
+  --pastel-purple: #9B59B6;
+  --pastel-purple-light: #F7EFFC;
+  --pastel-purple-dark: #81409C;
+
+  --pastel-peach: #FFA07A;
+  --pastel-peach-light: #FFF4ED;
+  --pastel-peach-dark: #E6845D;
+
+  --pastel-green: #2ECC71;
+  --pastel-green-light: #EAF9F0;
+
+  /* Superficies y Neutros */
+  --bg-app: #F8F9FD;
+  --bg-card: #FFFFFF;
+  --bg-card-subtle: #F3F5FA;
+  
+  --text-main: #2D3748;
+  --text-secondary: #718096;
+  --text-light: #A0AEC0;
+  
+  --border-subtle: #E2E8F0;
+  --border-radius-sm: 12px;
+  --border-radius-md: 20px;
+  --border-radius-lg: 28px;
+  --border-radius-full: 9999px;
+
+  /* Sombras Táctiles 3D (para botones infantiles) */
+  --shadow-sm: 0 2px 6px rgba(113, 128, 150, 0.08);
+  --shadow-md: 0 6px 18px rgba(113, 128, 150, 0.1);
+  --shadow-lg: 0 12px 28px rgba(113, 128, 150, 0.14);
+  --shadow-button-mint: 0 4px 0 #36B4AB;
+  --shadow-button-amber: 0 4px 0 #E5A625;
+  --shadow-button-coral: 0 4px 0 #D94444;
+  --shadow-button-blue: 0 4px 0 #2A73D4;
+  --shadow-button-purple: 0 4px 0 #6C3483;
+}
+
+/* Reset y Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Nunito', 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none; /* Evita selecciones accidentales en niños pequeños */
+}
+
+/* Tipografía amigable */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Quicksand', 'Nunito', sans-serif;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Botones con estilo táctil infantil */
+.btn-kid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--border-radius-full);
+  font-weight: 800;
+  font-size: 1rem;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  
+  &:active {
+    transform: translateY(3px) !important;
+  }
+
+  &.btn-mint {
+    background-color: var(--pastel-mint);
+    color: #FFFFFF;
+    box-shadow: var(--shadow-button-mint);
+    &:hover { background-color: var(--pastel-mint-dark); }
+    &:active { box-shadow: 0 1px 0 #2b918a; }
+  }
+
+  &.btn-amber {
+    background-color: var(--pastel-amber);
+    color: #4A3B12;
+    box-shadow: var(--shadow-button-amber);
+    &:hover { background-color: var(--pastel-amber-dark); }
+    &:active { box-shadow: 0 1px 0 #C28919; }
+  }
+
+  &.btn-coral {
+    background-color: var(--pastel-coral);
+    color: #FFFFFF;
+    box-shadow: var(--shadow-button-coral);
+    &:hover { background-color: var(--pastel-coral-dark); }
+    &:active { box-shadow: 0 1px 0 #B52F2F; }
+  }
+
+  &.btn-blue {
+    background-color: var(--pastel-blue);
+    color: #FFFFFF;
+    box-shadow: var(--shadow-button-blue);
+    &:hover { background-color: var(--pastel-blue-dark); }
+    &:active { box-shadow: 0 1px 0 #1E5CB0; }
+  }
+
+  &.btn-purple {
+    background-color: var(--pastel-purple);
+    color: #FFFFFF;
+    box-shadow: var(--shadow-button-purple);
+    &:hover { background-color: var(--pastel-purple-dark); }
+    &:active { box-shadow: 0 1px 0 #542268; }
+  }
+
+  &.btn-secondary {
+    background-color: #FFFFFF;
+    color: var(--text-main);
+    border: 2px solid var(--border-subtle);
+    box-shadow: 0 3px 0 var(--border-subtle);
+    &:hover { background-color: var(--bg-card-subtle); }
+    &:active { box-shadow: 0 1px 0 var(--border-subtle); }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Tarjetas Minimalistas */
+.card-kid {
+  background: var(--bg-card);
+  border-radius: var(--border-radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &.interactive {
+    cursor: pointer;
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+  }
+}
+
+/* Insignias / Pills */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--border-radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+  
+  &.mint { background: var(--pastel-mint-light); color: var(--pastel-mint-dark); }
+  &.amber { background: var(--pastel-amber-light); color: #B37D0B; }
+  &.coral { background: var(--pastel-coral-light); color: var(--pastel-coral-dark); }
+  &.blue { background: var(--pastel-blue-light); color: var(--pastel-blue-dark); }
+  &.purple { background: var(--pastel-purple-light); color: var(--pastel-purple-dark); }
+}
+
+/* Animaciones suaves */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.9); opacity: 0; }
+  70% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(78, 205, 196, 0.4); }
+  50% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(78, 205, 196, 0); }
+}
+
+.anim-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.anim-pop {
+  animation: pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Scrollbar estilizada y suave */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E0;
+  border-radius: 4px;
+  &:hover { background: #A0AEC0; }
+}

@@ -1,0 +1,94 @@
+<div class="game-container">
+  <div class="game-header">
+    <div class="header-left">
+      <a routerLink="/" class="back-btn" title="Volver al menú">← Volver</a>
+      <span class="game-badge amber">Juego 11 • Comprensión Crítica</span>
+      <h1 class="game-title">Relámpago de Letras: Microficción</h1>
+    </div>
+    <div class="header-right">
+      <span class="progress-pill">Relato {{ currentIndex() + 1 }} de {{ activeChallenges().length }}</span>
+      <span class="score-pill">⭐ {{ score() }} aciertos</span>
+    </div>
+  </div>
+
+  @if (!gameFinished()) {
+    <div class="microfiction-card anim-pop">
+      <!-- El microrrelato -->
+      <div class="story-box">
+        <div class="story-header">
+          <span class="story-tag">⚡ Microrrelato</span>
+          <span class="story-title">{{ currentChallenge().title }}</span>
+          <span class="story-author">({{ currentChallenge().author }})</span>
+        </div>
+        <blockquote class="story-text">
+          {{ currentChallenge().text }}
+        </blockquote>
+      </div>
+
+      <!-- Pregunta de análisis -->
+      <div class="question-section">
+        <h3 class="question-prompt">{{ currentChallenge().question }}</h3>
+        <div class="options-list">
+          @for (opt of currentChallenge().options; track opt; let idx = $index) {
+            <button 
+              type="button" 
+              class="micro-option-btn" 
+              [class.selected]="selectedIndex() === idx"
+              [class.correct]="isAnswerChecked() && idx === currentChallenge().correctIndex"
+              [class.wrong]="isAnswerChecked() && selectedIndex() === idx && idx !== currentChallenge().correctIndex"
+              [disabled]="isAnswerChecked()"
+              (click)="selectOption(idx)">
+              <span class="option-bullet">{{ ['A', 'B', 'C', 'D'][idx] }}</span>
+              <span class="option-label">{{ opt }}</span>
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Retroalimentación -->
+      @if (isAnswerChecked()) {
+        <div class="feedback-card anim-pop" [class.success]="isCorrect()" [class.wrong]="!isCorrect()">
+          <div class="feedback-title">
+            {{ isCorrect() ? '⚡ ¡Comprensión Relámpago Brillante!' : '💡 ¡Descubramos la intención del autor!' }}
+          </div>
+          <p class="feedback-desc">{{ currentChallenge().literaryAnalysis }}</p>
+          <div class="action-row">
+            <button type="button" class="btn-kid btn-amber anim-pop" (click)="nextChallenge()">
+              {{ currentIndex() === activeChallenges().length - 1 ? '🏁 Ver sabiduría final' : 'Siguiente microrrelato ➔' }}
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="victory-card anim-pop">
+      <div class="trophy-avatar anim-float">⚡</div>
+      <h2 class="victory-title">¡Maestro del Relámpago Literario!</h2>
+      <p class="victory-desc">Has descifrado la ironía, la elipsis y la profundidad de los microrrelatos contemporáneos más celebrados.</p>
+
+      <div class="result-stats">
+        <div class="stat-box">
+          <span class="stat-number">{{ score() }}/{{ activeChallenges().length }}</span>
+          <span class="stat-label">Relatos Comprendidos</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">+{{ score() * 40 + 30 }}</span>
+          <span class="stat-label">Puntos XP</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number">{{ score() >= 3 ? '⭐⭐⭐' : score() >= 2 ? '⭐⭐' : '⭐' }}</span>
+          <span class="stat-label">Estrellas</span>
+        </div>
+      </div>
+
+      <div class="victory-buttons">
+        <button type="button" class="btn-kid btn-amber" (click)="restartGame()">
+          🔄 Leer nuevos relatos
+        </button>
+        <a routerLink="/" class="btn-kid btn-secondary">
+          🏠 Volver al inicio
+        </a>
+      </div>
+    </div>
+  }
+</div>
